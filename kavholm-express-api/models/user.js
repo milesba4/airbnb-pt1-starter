@@ -41,6 +41,7 @@ class User {
       if (!credentials?.hasOwnProperty(property)) {
         throw new BadRequestError(`Missing ${property} in request body.`)
       }
+ 
     })
 
     if (credentials.email.indexOf("@") <= 0) {
@@ -76,8 +77,9 @@ class User {
       ]
     )
     const user = userResult.rows[0]
+  
 
-    return user
+    return this.makePublicUser(user)
   }
 
   static async fetchUserByEmail(email) {
